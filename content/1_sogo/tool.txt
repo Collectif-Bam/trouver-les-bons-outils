@@ -1,0 +1,25 @@
+Title: Sogo
+
+----
+
+Fonction: <p>Centraliser son calendrier et carnet d'adresse</p>
+
+----
+
+Positive: 
+
+----
+
+Summary: <p>SOGo offre de multiples façons d’accéder à l’agenda, aux données du carnet d’adresses et est intégré au courrier électronique Cloudron l’interface de OSINUM. Vos utilisateurs peuvent utiliser un navigateur Web, Microsoft Outlook, Mozilla Thunderbird, Apple iCal ou un appareil mobile pour accéder aux mêmes informations.</p>
+
+----
+
+Indicators: 
+
+----
+
+Tags: tag 1, tag 2, tag 3
+
+----
+
+Opinion: <p>SOGo offre de multiples façons d’accéder à l’agenda, aux données du carnet d’adresses et est intégré au courrier électronique Cloudron l’interface de OSINUM. Vos utilisateurs peuvent utiliser un navigateur Web, Microsoft Outlook, Mozilla Thunderbird, Apple iCal ou un appareil mobile pour accéder aux mêmes informations.</p>

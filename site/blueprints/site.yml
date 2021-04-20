@@ -1,3 +1,57 @@
 title: Site
-preset: pages
-unlisted: true
+
+tabs:
+  content:
+    label: Contenu
+    icon: layers
+    sections:
+      tools:
+        headline: Outils
+        type: pages
+        template: tool
+        create: tool
+        layout: cards
+  
+  pratiques:
+    icon: circle-filled
+    sections:
+      tags:
+        type: fields
+        fields:
+          tagsGroup:
+            label: Ensembles de pratiques
+            type: structure
+            fields:
+              title:
+                label: Nom
+                type: text
+              tags:
+                label: Pratiques
+                type: tags
+  seo:
+    icon: search
+    sections:
+      seoSection:
+        type: fields
+        fields:
+          desc:
+            label: Description
+            type: textarea
+            maxlength: 160
+            buttons: false
+            width: 1/3
+            help: Utilisée par les moteurs de recherche.
+            autofocus: true
+          favicon:
+            type: files
+            multiple: false
+            layout: cards
+            width: 1/3
+            help: JPEG ou PNG de 16 x 16 pixels. La favicon est la petite image affichée dans l'onglet du navigateur.
+          socialImg:
+            label: Image partage réseau sociaux
+            type: files
+            multiple: false
+            width: 1/3
+            layout: cards
+            help: JPEG ou PNG de 1200 x 630 pixels. Cette image sera affichée dans les publications sur les réseaux sociaux.

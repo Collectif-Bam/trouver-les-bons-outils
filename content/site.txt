@@ -1,1 +1,24 @@
-Title: Site Title
+Title: osinum
+
+----
+
+Tagsgroup:
+
+- 
+  title: diffuser
+  tags: tag 1, tag 2, tag 3
+- 
+  title: Produire
+  tags: tag 4, tag 5, tag 6
+
+----
+
+Desc: 
+
+----
+
+Favicon: 
+
+----
+
+Socialimg: 

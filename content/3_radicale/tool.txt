@@ -1,0 +1,13 @@
+Title: Radicale
+
+----
+
+Fonction: <p>Centraliser son calendrier et carnet d’adresse</p>
+
+----
+
+Summary: <p>Le projet Radicale est une solution serveur CalDAV (calendrier) et CardDAV (contact). Les calendriers et les carnets d’adresses peuvent être visualisés, modifiés et synchronisés par le calendrier et les clients de contact sur les téléphones mobiles ou les ordinateurs.</p>
+
+----
+
+Opinion: <p>Le projet Radicale est une solution serveur CalDAV (calendrier) et CardDAV (contact). Les calendriers et les carnets d’adresses peuvent être visualisés, modifiés et synchronisés par le calendrier et les clients de contact sur les téléphones mobiles ou les ordinateurs.</p>

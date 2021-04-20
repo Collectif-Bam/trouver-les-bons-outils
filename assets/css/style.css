@@ -1,0 +1,72 @@
+/* ================= RESET ================= */
+
+:root {
+    --color-blue: #2A3180;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    border: none;
+    background-color: transparent;
+    font-family: 'Roboto', sans-serif;
+    color: #000;
+}
+
+a, button {
+    text-decoration: none;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    width: 100%;
+}
+
+h1 {
+    font-size: 1.5rem;
+}
+
+h2 {
+    font-size: 1rem;
+}
+
+/* =================================== */
+/* ================= START ================= */
+/* =================================== */
+
+
+/* ================= HEADER ================= */
+
+.header__search {
+    
+}
+
+/* ================= GRID / TOOLS ================= */
+
+.tools {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+}
+
+.tool {
+    border: 1px solid var(--color-blue);
+}
+
+.tool__header {
+    border-bottom: 1px solid var(--color-blue);
+}

@@ -1,0 +1,13 @@
+Title: Rocketchat
+
+----
+
+Fonction: <p>Visoconférence en équipe et chat</p>
+
+----
+
+Summary: <p>Nextcloud est un serveur de synchronisation et de partage de fichiers. Il fournit un accès à vos données via une interface Web, des clients de synchronisation ou WebDAV, tout en offrant une plateforme permettant de visualiser, de synchroniser et de partager facilement entre les appareils, le tout sous votre contrôle.</p>
+
+----
+
+Opinion: <p>Nextcloud est un serveur de synchronisation et de partage de fichiers. Il fournit un accès à vos données via une interface Web, des clients de synchronisation ou WebDAV, tout en offrant une plateforme permettant de visualiser, de synchroniser et de partager facilement entre les appareils, le tout sous votre contrôle.</p>
