@@ -1,0 +1,32 @@
+{
+  "name": "osinum",
+  "version": "1.0.0",
+  "description": "<img src=\"http://getkirby.com/assets/images/github/plainkit.jpg\" width=\"300\">",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/getkirby/plainkit.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/getkirby/plainkit/issues"
+  },
+  "homepage": "https://github.com/getkirby/plainkit#readme",
+  "dependencies": {
+    "@babel/core": "^7.13.15",
+    "@babel/polyfill": "^7.12.1",
+    "@babel/preset-env": "^7.13.15",
+    "@babel/register": "^7.13.14"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-babel": "^8.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-uglifycss": "^1.1.0"
+  }
+}
