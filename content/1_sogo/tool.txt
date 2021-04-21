@@ -14,7 +14,7 @@ Summary: <p>SOGo offre de multiples façons d’accéder à l’agenda, aux donn
 
 ----
 
-Indicators: 
+Indicators: osinum
 
 ----
 

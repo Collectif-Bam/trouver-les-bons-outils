@@ -10,7 +10,7 @@ tabs:
         fields:
           fonction:
             label: Description de la fonction
-            type: writer
+            type: text
             placeholder: Centraliser son calendrier et carnet d’adresse
             width: 1/2
           positive:
@@ -40,8 +40,8 @@ tabs:
             label: Indicateurs
             type: checkboxes
             options:
-              - Sélection Osinum
-              - Outil mobile
+              osinum: Sélection Osinum
+              mobile: Outil mobile
             width: 1/3
           tags:
             label: Pratiques associées

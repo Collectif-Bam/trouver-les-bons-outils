@@ -10,7 +10,7 @@ Summary: <p>Le projet Radicale est une solution serveur CalDAV (calendrier) et C
 
 ----
 
-Indicators: 
+Indicators: mobile
 
 ----
 
