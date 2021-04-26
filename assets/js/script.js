@@ -41,6 +41,13 @@ DÉBUT
         wrapper: document.querySelector('.search__wrapper'),
         filters: document.querySelectorAll('.search__filter'),
         list: document.querySelector('.search__list'),
+        indicators: document.querySelectorAll('.filters__indicator'),
+        initIndicators: () => {
+            document.querySelectorAll('input').forEach(input => {
+                input.checked = false
+            })
+            document.querySelector('input').checked = true
+        },
         isOpen: false,
         toggle: () => {
             search.container.classList.toggle('search--open')
@@ -50,6 +57,33 @@ DÉBUT
             }, 100);
             
             search.isOpen = !search.isOpen
+        },
+        filter: (label, isCheck) => {
+            if (label === 'mobile') {
+                if (isCheck) {
+                    tools.cards.forEach(tool => {
+                        if (!tool.dataset.indicators.includes('mobile')) {
+                            tool.classList.add('mobileLock')
+                        }
+                    })
+                } else {
+                    document.querySelectorAll('.mobileLock').forEach(element => {
+                        element.classList.remove('mobileLock')
+                    });
+                }
+            } else {
+                if (label === 'selection') {
+                    tools.cards.forEach(tool => {
+                        if (!tool.dataset.indicators.includes('osinum')) {
+                            tool.classList.add('selectionLock')
+                        }
+                    })
+                } else {
+                    document.querySelectorAll('.selectionLock').forEach(element => {
+                        element.classList.remove('selectionLock')
+                    });
+                }
+            }
         }
     }
 
@@ -72,10 +106,10 @@ DÉBUT
             delivery.activeFilters.push(tag)
 
             const li = document.createElement('li')
-            li.innerHTML = `<button class="selection__filter">${tag}<span><img class="picto" src="${app.url}/assets/pictos/close.svg" /></span></button>`
+            li.innerHTML = `<button class="selection__filter --tagBtn">${tag}<span><img class="picto" src="${app.url}/assets/pictos/close.svg" /></span></button>`
             selection.filters.appendChild(li)
 
-            target.parentNode.removeChild(target)
+            target.classList.add('hide')
         },
         
         removeFromFilters: target => {
@@ -83,9 +117,10 @@ DÉBUT
             const tag = target.textContent
             delivery.activeFilters = delivery.activeFilters.filter(item => item !== tag)
 
-            const li = document.createElement('li')
-            li.innerHTML = `<button class="search__filter">${tag}</button>`
-            search.list.appendChild(li)
+            search.filters.forEach(filter => {
+                if (filter.textContent === tag)
+                    filter.classList.remove('hide')
+            })
 
 
             target.parentNode.removeChild(target)
@@ -100,7 +135,7 @@ DÉBUT
                 delivery.selectedTools.push(title)
             
                 const li = document.createElement('li')
-                li.innerHTML = `<button class="selection__tool">${title}<span><img class="picto" src="${app.url}/assets/pictos/close.svg" /></span></button>`
+                li.innerHTML = `<button class="selection__tool --tagBtn">${title}<span><img class="picto" src="${app.url}/assets/pictos/close.svg" /></span></button>`
 
                 selection.tools.appendChild(li)
             } else {
@@ -130,6 +165,9 @@ DÉBUT
         }
     }
 
+    // =========================================== INITIALISATION
+    search.initIndicators()
+
     // =========================================== INTERACTIONS
 
     search.btn.addEventListener('click', () => {
@@ -142,6 +180,16 @@ DÉBUT
         selection.refresh()
         tools.refresh()
     })
+
+    search.indicators.forEach(indicator => {
+        indicator.addEventListener('change', e => {
+            const target = e.target
+            const label = target.nextElementSibling.dataset.value
+            const isCheck = target.checked
+
+            search.filter(label, isCheck)
+        })
+    });
 
     selection.filters.addEventListener('click', event => {
         const target = event.target.closest('.selection__filter')

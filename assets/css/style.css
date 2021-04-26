@@ -2,10 +2,11 @@
 
 :root {
     --color-blue: #2A3180;
-    --color-yellow: #FFFF00;
+    --color-selection: #FFFF00;
     --color-light-blue: #F4F5FF;
     --color-green: #7AFFAF;
     --margin-tool: 2vw;
+    --border-blue-regular: 1px solid var(--color-blue);
 }
 
 * {
@@ -17,6 +18,7 @@
     font-family: 'Roboto', sans-serif;
     color: var(--color-blue);
     height: max-content;
+    font-weight: 300;
 }
 
 a, button {
@@ -43,20 +45,51 @@ img {
     width: 100%;
 }
 
+h1,
+h2,
+h3,
+span {
+    font-weight: 500;
+}
+
 h1 {
-    font-size: 1.5rem;
+    font-size: 1.875rem;
 }
 
 h2 {
-    font-size: 1.4rem;
+    font-size: 1.25rem;
 }
 
 h3 {
     font-size: 1rem;
+    margin-bottom: .5rem;
 }
 
 p {
-    font-size: .8rem;
+    font-size: .75rem;
+}
+
+input {
+    cursor: pointer;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    appearance: none;
+    width: 1rem;
+    height: 1rem;
+    margin-right: .5rem;
+    border: var(--border-blue-regular);
+    background-color: transparent;
+}
+
+input[type="radio"] {
+    border-radius: 1rem;
+}
+
+input[type="radio"]:checked,
+input[type="checkbox"]:checked{
+    background-color: var(--color-blue);
 }
 
 /* =================================== */
@@ -69,7 +102,7 @@ p {
 .selection {
     height: 3rem;
     overflow: hidden;
-    border-bottom: 1px solid var(--color-blue);
+    border-bottom: var(--border-blue-regular);
 
     transition: all .7s ease;
     -webkit-transition: all .7s ease;
@@ -114,24 +147,17 @@ p {
     background-color: var(--color-light-blue);
 }
 
-.search__btn {
-    padding: 0 2vw;
-}
-
-.selection {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 25vw;
+.search__btn,
+.search__content {
     padding-left: 2vw;
-    box-sizing: border-box;
-    border-left: 1px solid var(--color-blue);
-    background-color: var(--color-yellow);
 }
 
-.selection__btn {
-    display: flex;
-    justify-content: space-between;
+.search__btn {
+    padding-right: 3vw;
+}
+
+.search__content {
+    margin-top: 3rem;
 }
 
 .search__wrapper {
@@ -142,7 +168,59 @@ p {
     -o-transition: all .53 ease;
 }
 
+.search__title--practices {
+    margin: 4rem 0;
+
+}
+
+.search__list--practices {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 80%;
+}
+
+.search__filter {
+    background-color: #fff;
+}
+
+.group__title {
+    margin-bottom: 1rem;
+}
+
+.search__filters {
+    width: max-content;
+    margin: 1rem 0;
+}
+
+.filters__wrapper {
+    display: flex;
+    width: max-content;
+    align-items: center;
+    margin-bottom: .5rem;
+}
+
+.filters__wrapper--selection {
+    padding-top: 1rem;
+    border-top: var(--border-blue-regular);
+}
+
 /* ================= SELECTION ================= */
+
+.selection {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 25vw;
+    padding-left: 2vw;
+    box-sizing: border-box;
+    border-left: var(--border-blue-regular);
+    background-color: var(--color-selection);
+}
+
+.selection__btn {
+    display: flex;
+    justify-content: space-between;
+}
 
 .selection__content {
     margin-top: 3rem;
@@ -154,10 +232,7 @@ p {
 
 .selection__filter,
 .selection__tool {
-    display: flex;
-    align-items: center;
-    padding: .5rem;
-    border: 1px solid var(--color-blue);
+    border: var(--border-blue-regular);
     margin-bottom: .5rem;
 }
 
@@ -179,7 +254,7 @@ p {
 }
 
 .tool {
-    outline: 1px solid var(--color-blue);
+    outline: var(--border-blue-regular);
     height: max-content;
     box-sizing: content-box;
 }
@@ -187,7 +262,7 @@ p {
     outline: 3px solid var(--color-blue);
 }
 .tool--selected {
-    background-color: var(--color-yellow);
+    background-color: var(--color-selection);
 }
 
 .tool h3,
@@ -203,7 +278,7 @@ p {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid var(--color-blue);
+    border-bottom: var(--border-blue-regular);
     padding: 1vw;
 }
 
@@ -226,19 +301,16 @@ p {
 }
 
 .summary__tag {
-    width: max-content;
-    padding: .2rem 1rem;
-    margin: .5rem 0;
     background-color: var(--color-light-blue);
 }
 
 .summary__tag--active {
-    background-color: var(--color-yellow);
+    background-color: var(--color-selection);
 }
 
 .pros,
 .cons {
-    border-top: 1px solid var(--color-blue);
+    border-top: var(--border-blue-regular);
 }
 
 .pros__btn,
@@ -249,13 +321,10 @@ p {
 .pros__title,
 .cons__title {
     padding: 1vw;
+    font-weight: 500;
 }
 
 /* ================= GENERIC ================= */
-
-.hide {
-    display: none;
-}
 
 .unvisible {
     opacity: 0;
@@ -264,4 +333,29 @@ p {
 .picto {
     max-width: 2rem;
     max-height: 2rem;
+}
+
+.plus {
+    max-width: 1rem;
+    max-height: 1rem;
+    margin-right: .5rem;
+}
+
+.--tagBtn {
+    display: flex;
+    align-items: center;
+    padding: .5rem;
+    margin-bottom: .5rem;
+    margin-right: .5rem;
+    width: max-content;
+    white-space: nowrap;
+}
+
+.hide {
+    display: none;
+}
+
+.mobileLock,
+.selectionLock {
+    display: none !important;
 }

@@ -32,12 +32,33 @@
         
         <div class="search__content">
             <div class="search__wrapper unvisible">
-                <h3>Sélectionner vos pratiques à outiller</h3>
-                <ul class="search__list">
-                    <?php foreach($site->tagsGroup()->toStructure()->pluck('tags', ',', true) as $tag): ?>
-                        <li><button class="search__filter"><?= $tag ?></button></li>
-                    <?php endforeach ?>
+                <h2 class="search__title search__title--filters">Filtres</h2>
+                <ul class="search__filters filters">
+                    <li class="filters__wrapper">
+                        <input class="filters__indicator" type="radio" name="filter">
+                        <label for="filter" data-value="all">Tous les outils</label>
+                    </li>
+                    <li class="filters__wrapper">
+                        <input class="filters__indicator" type="radio" name="filter">
+                        <label for="filter" data-value="selection">Sélection Osinum</label>
+                    </li>
                 </ul>
+                <div class="filters__wrapper filters__wrapper--selection">
+                    <input class="filters__indicator" type="checkbox" name="mobile">
+                    <label for="mobile" data-value="mobile">Outils mobiles uniquement</label>
+                </div>
+                
+                <h2 class="search__title search__title--practices">Pratiques</h2>
+                <div class="search__list search__list--practices">
+                    <?php foreach($site->tagsGroup()->toStructure() as $group): ?>
+                        <ul class="search__group group">
+                            <li><h3 class="group__title"><?= $group->title() ?></h3></li>
+                            <?php foreach($group->tags()->split() as $tag): ?>
+                                <li><button class="search__filter --tagBtn"><img class="plus" src="<?= url('assets/pictos') ?>/plus.svg" alt=""><?= $tag ?></button></li>
+                            <?php endforeach ?>
+                        </ul>
+                    <?php endforeach ?>
+                </div>
             </div>
         </div>
     </div>
@@ -65,7 +86,7 @@
         <!--========== TOOLS ==========-->
         <div class="tools">
         <?php foreach($site->children()->listed() as $tool): ?>
-            <section class="tool" data-tags="<?= $tool->tags() ?>">
+            <section class="tool" data-tags="<?= $tool->tags() ?>" data-indicators="<?= $tool->indicators() ?>">
                 <button class="tool__header">
                     <h2><?= $tool->title() ?></h2>
                     <div class="tool__indicators">
@@ -85,7 +106,7 @@
                     <ul class="summary__tags">
                         <?php foreach($tool->tags()->split() as $tag): ?>
                             <?php if ($tag): ?>
-                                <li class="summary__tag"><?= $tag ?></li>
+                                <li class="summary__tag --tagBtn"><?= $tag ?></li>
                             <?php endif ?>
                         <?php endforeach ?>
                     </ul>
