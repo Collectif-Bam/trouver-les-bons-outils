@@ -35,17 +35,14 @@
                 <h2 class="search__title search__title--filters">Filtres</h2>
                 <ul class="search__filters filters">
                     <li class="filters__wrapper">
-                        <input class="filters__indicator" type="radio" name="filter">
-                        <label for="filter" data-value="all">Tous les outils</label>
+                        <label for="filter--all" data-value="all"><input id="filter--all" class="filters__indicator" type="radio" name="filter">Tous les outils</label>
                     </li>
                     <li class="filters__wrapper">
-                        <input class="filters__indicator" type="radio" name="filter">
-                        <label for="filter" data-value="selection">Sélection Osinum</label>
+                        <label for="filter--osinum" data-value="selection"><input id="filter--osinum" class="filters__indicator" type="radio" name="filter">Sélection Osinum</label>
                     </li>
                 </ul>
                 <div class="filters__wrapper filters__wrapper--selection">
-                    <input class="filters__indicator" type="checkbox" name="mobile">
-                    <label for="mobile" data-value="mobile">Outils mobiles uniquement</label>
+                    <label for="mobile" data-value="mobile"><input id="mobile" class="filters__indicator" type="checkbox" name="mobile">Outils mobiles uniquement</label>
                 </div>
                 
                 <h2 class="search__title search__title--practices">Pratiques</h2>
@@ -77,9 +74,28 @@
             </ul>
             <h2>Outils sélectionnés</h2>
             <ul class="selection__tools">
-
+                <!-- Selected tools will be injected here -->
             </ul>
-
+            <div class="selection__footer">
+                <div class="form ">
+                    <div class="honeypot">
+                        <label for="website">Website <abbr title="required">*</abbr></label>
+                        <input type="website" id="website" name="website" tabindex="-1">
+                    </div>
+                    <input type="email" name="" id="" placeholder="adresse@mail.com" size="35%">
+                    <label for="contact">
+                        <input type="checkbox" name="contact" id="contact">
+                        <div class="contact__message">
+                        <h3>Je souhaite être recontacté</h3>
+                        Notre équipe répond à vos questions, vous conseille et vous présente les avantages et fonctionnalités d’Osinum.
+                        </div>
+                    </label>
+                </div>
+                <button class="formBtn">
+                    <input class="form__submit" type="submit" name="submit" value="Ok">
+                    <h2>Recevoir ma sélection par mail</h2>
+                </button>
+            </div>
         </div>
     </div>
         

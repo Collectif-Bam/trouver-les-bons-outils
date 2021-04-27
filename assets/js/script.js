@@ -95,6 +95,28 @@ DÉBUT
         refresh: () => {
             selection.count = delivery.activeFilters.length
             selection.counter.textContent = selection.count
+        },
+        form: {
+            container: document.querySelector('.form'),
+            openBtn: document.querySelector('.formBtn'),
+            submitBtn: document.querySelector('.form__submit'),
+            toggle: () => {
+                selection.form.container.classList.toggle('form--open')
+            },
+            submit: data => {
+                const url = app.url + '/assets/mails/sendSelection.php'
+                
+                fetch(url, {
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'text/html'
+                    },
+                    method: "POST",
+                    body: JSON.stringify(data)
+                })
+                .then(function(res){ console.log(res) })
+                .catch(function(res){ console.log(res) })
+            }
         }
     }
 
@@ -184,7 +206,7 @@ DÉBUT
     search.indicators.forEach(indicator => {
         indicator.addEventListener('change', e => {
             const target = e.target
-            const label = target.nextElementSibling.dataset.value
+            const label = target.parentNode.dataset.value
             const isCheck = target.checked
 
             search.filter(label, isCheck)
@@ -214,6 +236,19 @@ DÉBUT
         tool.querySelector('.tool__header').addEventListener('click', event => {
             delivery.selectTool(tool)
         })
+    })
+
+    selection.form.openBtn.addEventListener('click', () => {
+        selection.form.toggle()
+    })
+
+    selection.form.submitBtn.addEventListener('click', () => {
+        data = {
+            email: 'adrien.payet@outlook.com',
+            message: 'un certain message'
+        }
+        
+        selection.form.submit(data)
     })
 
 /* ====================

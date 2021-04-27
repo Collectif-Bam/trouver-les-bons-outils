@@ -56,8 +56,10 @@ h1 {
     font-size: 1.875rem;
 }
 
-h2 {
+h2,
+input[type="submit"] {
     font-size: 1.25rem;
+    font-weight: 500;
 }
 
 h3 {
@@ -69,8 +71,14 @@ p {
     font-size: .75rem;
 }
 
-input {
+input,
+label {
     cursor: pointer;
+}
+
+label {
+    display: flex;
+    align-items: center;
 }
 
 input[type="checkbox"],
@@ -90,6 +98,13 @@ input[type="radio"] {
 input[type="radio"]:checked,
 input[type="checkbox"]:checked{
     background-color: var(--color-blue);
+}
+
+input[type="email"] {
+    padding: .5rem;
+    margin: 1rem 0;
+    cursor: text;
+    border: var(--border-blue-regular);
 }
 
 /* =================================== */
@@ -193,9 +208,7 @@ input[type="checkbox"]:checked{
 }
 
 .filters__wrapper {
-    display: flex;
     width: max-content;
-    align-items: center;
     margin-bottom: .5rem;
 }
 
@@ -241,6 +254,48 @@ input[type="checkbox"]:checked{
     margin-left: 1rem;
     display: flex;
     align-items: center;
+}
+
+/* ================= FORM ================= */
+.selection__footer {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    right: 0;
+    background-color: #fff;
+    border-top: var(--border-blue-regular);
+}
+
+.formBtn {
+    width: 100%;
+    padding-top: 1rem;
+    text-align: center;
+    height: 6rem;
+}
+
+.form {
+    height: 0;
+    padding-left: 2rem;
+    overflow: hidden;
+    border-bottom: var(--border-blue-regular);
+
+    transition: all .5s ease;
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -o-transition: all .5s ease;
+}
+
+.form--open {
+    height: 12rem;
+}
+
+.form label {
+    display: flex;
+    align-items: flex-start;
+}
+
+.contact__message {
+    width: 80%;
 }
 
 /* ================= GRID / TOOLS ================= */
@@ -358,4 +413,9 @@ input[type="checkbox"]:checked{
 .mobileLock,
 .selectionLock {
     display: none !important;
+}
+
+.honeypot {
+    position: absolute;
+    left: -9999px;
 }
