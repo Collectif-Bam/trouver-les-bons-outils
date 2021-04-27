@@ -13,21 +13,31 @@ tabs:
             type: text
             placeholder: Centraliser son calendrier et carnet d’adresse
             width: 1/2
-          positive:
-            label: ++
-            type: writer
+          pros:
+            label: Osinum l'apprécie pour
+            type: textarea
             width: 1/2
-            placeholder: Ce qu'Osinum aime
+            buttons:
+              - ul
+              - link
+              - bold
+              - italic
+            help: Une liste à puce.
           summary:
             label: Présentation
             type: writer
             width: 1/2
             placeholder: Brève présentation de l'outil
-          negative:
-            label: --
-            type: writer
+          cons:
+            label: Osinum avertit sur
+            type: textarea
             width: 1/2
-            placeholder: Ce qu'Osinum aime moins
+            buttons:
+              - ul
+              - link
+              - bold
+              - italic
+            help: Une liste à puce.
 
 
   categories:

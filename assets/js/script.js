@@ -8,11 +8,14 @@ DÉBUT
     // =========================================== OBJECTS
 
     const app = {
-        url: document.querySelector('body').dataset.url
+        url: document.querySelector('body').dataset.url,
+        email: document.querySelector('body').dataset.email,
+        name: document.querySelector('body').dataset.name
     }
 
     const tools = {
         cards: document.querySelectorAll('.tool'),
+        comments: document.querySelectorAll('.comment'),
         refresh: () => {
             tools.cards.forEach(tool => {
 
@@ -31,6 +34,27 @@ DÉBUT
                 }
 
             })
+        },
+        toggleComment: comment => {
+
+            const content = comment.querySelector('.comment__content')
+
+            const icon = comment.querySelector('.dropDown')
+
+            icon.classList.toggle('dropDown--close')
+
+            if (content.classList.contains('hide')) {
+                content.classList.remove('hide')
+                setTimeout(() => {
+                    const contentHeight = parseInt(window.getComputedStyle(content).getPropertyValue('height'))
+                    comment.style.height = `calc(3rem + ${contentHeight}px)`
+                }, 10);
+            } else {
+                comment.style.height = ''
+                setTimeout(() => {
+                    content.classList.add('hide')
+                }, 500);
+            }
         }
     }
 
@@ -88,34 +112,106 @@ DÉBUT
     }
 
     const selection = {
-        counter: document.querySelector('.count'),
-        count: 0,
+        practicesCounter: document.querySelector('.practicesCount'),
+        practicesCount: 0,
+        toolsCounter: document.querySelector('.toolsCount'),
+        toolsCount: 0,
         filters: document.querySelector('.selection__filters'),
         tools: document.querySelector('.selection__tools'),
         refresh: () => {
-            selection.count = delivery.activeFilters.length
-            selection.counter.textContent = selection.count
+            selection.practicesCount = delivery.activeFilters.length
+            selection.practicesCounter.textContent = selection.practicesCount
+            
+            console.log(delivery.selectedTools);
+
+            selection.toolsCount = delivery.selectedTools.length
+            selection.toolsCounter.textContent = selection.toolsCount
         },
         form: {
             container: document.querySelector('.form'),
             openBtn: document.querySelector('.formBtn'),
             submitBtn: document.querySelector('.form__submit'),
-            toggle: () => {
-                selection.form.container.classList.toggle('form--open')
+            CTA: document.querySelector('.formCTA'),
+            open: () => {
+                selection.form.container.classList.add('form--open')
+                selection.form.CTA.classList.add('--fadeToUp')
+                selection.form.submitBtn.classList.add('--fadeFromDown')
             },
-            submit: data => {
+            close: () => {
+                selection.form.container.classList.remove('form--open')
+                selection.form.CTA.classList.remove('--fadeToUp')
+                selection.form.submitBtn.classList.remove('--fadeFromDown')
+            },
+            success: () => {
+                console.log('success');
+                const originalText = selection.form.CTA.textContent
+
+                selection.form.CTA.textContent = 'Envoyé !'
+                setTimeout(() => {
+                    selection.form.CTA.textContent = originalText
+                }, 1000);
+            },
+            error: () => {
+                const originalText = selection.form.CTA.textContent
+
+                selection.form.CTA.textContent = 'Erreur, veuillez réessayer plus tard'
+            },
+            validateMail: userMail => {
+                const validateMail = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/g
+                return validateMail.test(userMail)
+            },
+            invalid: () => {
+                const originalText = selection.form.submitBtn.value
+
+                selection.form.submitBtn.value = 'Mail invalide !'
+                setTimeout(() => {
+                    selection.form.submitBtn.value = originalText
+                }, 500);
+            },
+            submit: userMail => {
                 const url = app.url + '/assets/mails/sendSelection.php'
+
+                const contact = document.querySelector('#contact').checked ? `${userMail}, ${app.name} <${app.email}>` : userMail
+
+                const toolsList = document.createElement('ul')
+                let toolsNames = []
+                document.querySelectorAll('.selection__tool').forEach(tool => {
+                    const name = tool.textContent
+                    toolsNames.push(name)
+                })
+
+                toolsNames.forEach(toolName => {
+                    const li = document.createElement('li')
+                    li.textContent = toolName
+                    toolsList.appendChild(li)
+                })
+
+                const data = {
+                    from: `${app.name} <${app.email}>`,
+                    to: contact,
+                    message: `Bonjour,<br />
+                    <br />
+                    Vos outils libres sélectionnés via Osinum : <br />
+                    ${toolsList.outerHTML}`
+                }
                 
                 fetch(url, {
                     headers: {
                         'Accept': 'application/json',
-                        'Content-Type': 'text/html'
+                        'Content-Type': 'application/json'
                     },
                     method: "POST",
                     body: JSON.stringify(data)
                 })
-                .then(function(res){ console.log(res) })
-                .catch(function(res){ console.log(res) })
+                .then(res => { 
+                    console.log(res)
+                    selection.form.close()
+                    selection.form.success()
+                })
+                .catch(res => { 
+                    console.log(res)
+                    selection.form.error()
+                })
             }
         }
     }
@@ -223,6 +319,7 @@ DÉBUT
     selection.tools.addEventListener('click', event => {
         const target = event.target.classList.contains('selection__tool') ? event.target : event.target.closest('.selection__tool')
         delivery.deselectTool(target)
+        selection.refresh()
     })
 
     tools.cards.forEach(tool => {
@@ -235,20 +332,29 @@ DÉBUT
 
         tool.querySelector('.tool__header').addEventListener('click', event => {
             delivery.selectTool(tool)
+            selection.refresh()
         })
     })
 
-    selection.form.openBtn.addEventListener('click', () => {
-        selection.form.toggle()
+    selection.form.submitBtn.addEventListener('click', () => {
+
+        if (!selection.form.container.classList.contains('form--open')) {
+            selection.form.open()
+        } else {
+            const userMail = document.querySelector('.form input[type="email"]').value
+        
+            if (selection.form.validateMail(userMail)) {
+                selection.form.submit(userMail)
+            } else {
+                selection.form.invalid()
+            }
+         }
     })
 
-    selection.form.submitBtn.addEventListener('click', () => {
-        data = {
-            email: 'adrien.payet@outlook.com',
-            message: 'un certain message'
-        }
-        
-        selection.form.submit(data)
+    tools.comments.forEach(comment => {
+        comment.addEventListener('click', () => {
+            tools.toggleComment(comment)
+        })
     })
 
 /* ====================

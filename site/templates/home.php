@@ -21,18 +21,18 @@
     ?>' />
     <meta property='og:description' content='<?= $site->desc() ?>' />
 </head>
-<body data-url="<?= $site->url() ?>">
+<body data-url="<?= $site->url() ?>" data-email="<?= $site->email() ?>" data-name="<?= $site->name() ?>">
     <!--========== SEARCH ==========-->
 
     <div class="search">
         <button class="search__btn">
-            <h1>Définir ma recherche</h1>
+            <h1>Filtrer</h1>
             <img class="picto dropDown dropDown--close" src="<?= url('assets/pictos') ?>/drop-down.svg" alt="">
         </button>
         
         <div class="search__content">
             <div class="search__wrapper unvisible">
-                <h2 class="search__title search__title--filters">Filtres</h2>
+                <h2 class="search__title search__title--filters">Affichage</h2>
                 <ul class="search__filters filters">
                     <li class="filters__wrapper">
                         <label for="filter--all" data-value="all"><input id="filter--all" class="filters__indicator" type="radio" name="filter">Tous les outils</label>
@@ -45,7 +45,7 @@
                     <label for="mobile" data-value="mobile"><input id="mobile" class="filters__indicator" type="checkbox" name="mobile">Outils mobiles uniquement</label>
                 </div>
                 
-                <h2 class="search__title search__title--practices">Pratiques</h2>
+                <h2 class="search__title search__title--practices">Par pratiques</h2>
                 <div class="search__list search__list--practices">
                     <?php foreach($site->tagsGroup()->toStructure() as $group): ?>
                         <ul class="search__group group">
@@ -64,36 +64,33 @@
     
     <div class="selection selection--open">
         <button class="selection__btn">
-            <h1>Sélection</h1>
+            <h1>Ma sélection</h1>
         </button>
 
         <div class="selection__content">
-            <h2>Pratiques sélectionnées (<span class="count">0</span>)</h2>
+            <h2>Pratiques sélectionnées (<span class="practicesCount">0</span>)</h2>
             <ul class="selection__filters">
                 
             </ul>
-            <h2>Outils sélectionnés</h2>
+            <h2>Outils sélectionnés (<span class="toolsCount">0</span>)</h2>
             <ul class="selection__tools">
                 <!-- Selected tools will be injected here -->
             </ul>
             <div class="selection__footer">
-                <div class="form ">
-                    <div class="honeypot">
-                        <label for="website">Website <abbr title="required">*</abbr></label>
-                        <input type="website" id="website" name="website" tabindex="-1">
-                    </div>
-                    <input type="email" name="" id="" placeholder="adresse@mail.com" size="35%">
+                <div class="form">
+                    <input type="email" name="" id="" placeholder="adresse@mail.com" size="35%" required>
                     <label for="contact">
                         <input type="checkbox" name="contact" id="contact">
                         <div class="contact__message">
                         <h3>Je souhaite être recontacté</h3>
-                        Notre équipe répond à vos questions, vous conseille et vous présente les avantages et fonctionnalités d’Osinum.
+                        Notre équipe répond à vos questions, vous commenteille et vous présente les avantages et fonctionnalités d’Osinum.
                         </div>
                     </label>
                 </div>
+                
                 <button class="formBtn">
                     <input class="form__submit" type="submit" name="submit" value="Ok">
-                    <h2>Recevoir ma sélection par mail</h2>
+                    <h2 class="formCTA">Recevoir ma sélection par mail</h2>
                 </button>
             </div>
         </div>
@@ -127,15 +124,17 @@
                         <?php endforeach ?>
                     </ul>
 
-                    <div class="pros">
-                        <button class="pros__btn">
-                            <h4 class="pros__title">Osinum l'apprécie pour :</h4>
-                        </button>
+                    <div class="comment">
+                        <h4 class="comment__title">Osinum l'apprécie pour :<img class="picto dropDown dropDown--close" src="<?= url('assets/pictos') ?>/drop-down.svg" alt=""></h4>
+                        <div class="comment__content hide">
+                            <?= $tool->pros()->kt() ?>
+                        </div>
                     </div>
-                    <div class="cons">
-                        <button class="cons__btn">
-                            <h4 class="cons__title">Osinum avertit sur :</h4>
-                        </button>
+                    <div class="comment">
+                        <h4 class="comment__title">Osinum avertit sur : <img class="picto dropDown dropDown--close" src="<?= url('assets/pictos') ?>/drop-down.svg" alt=""></h4>
+                        <div class="comment__content hide">
+                            <?= $tool->cons()->kt() ?>
+                        </div>
                     </div>
                 </div>
             </section>
