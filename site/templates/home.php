@@ -42,7 +42,7 @@
                     </li>
                 </ul>
                 <div class="filters__wrapper filters__wrapper--selection">
-                    <label for="mobile" data-value="mobile"><input id="mobile" class="filters__indicator" type="checkbox" name="mobile">Outils mobiles uniquement</label>
+                    <label for="mobile" data-value="mobile"><input id="mobile" class="filters__indicator" type="checkbox" name="mobile">Outils mobile uniquement</label>
                 </div>
                 
                 <h2 class="search__title search__title--practices">Par pratiques</h2>
@@ -68,11 +68,15 @@
         </button>
 
         <div class="selection__content">
-            <h2>Pratiques sélectionnées (<span class="practicesCount">0</span>)</h2>
+            <h2 class="selection__sectionTitle selection__sectionTitle--filters">Filtres actifs <span class="hide">(<span class="practicesCount">0</span>)</span></h2>
+            <div class="selection__indicators">
+                <div class="selection__indicators__osinum hide"><img class="picto" src="<?= url('assets/pictos') ?>/selection.svg" alt="">Sélection osinum</div>
+                <div class="selection__indicators__mobile hide"><img class="picto" src="<?= url('assets/pictos') ?>/mobile.svg" alt="">Outils mobile uniquement</div>
+            </div>
             <ul class="selection__filters">
                 
             </ul>
-            <h2>Outils sélectionnés (<span class="toolsCount">0</span>)</h2>
+            <h2 class="selection__sectionTitle selection__sectionTitle--tools">Outils sélectionnés (<span class="toolsCount">0</span>)</h2>
             <ul class="selection__tools">
                 <!-- Selected tools will be injected here -->
             </ul>
@@ -119,7 +123,7 @@
                     <ul class="summary__tags">
                         <?php foreach($tool->tags()->split() as $tag): ?>
                             <?php if ($tag): ?>
-                                <li class="summary__tag --tagBtn"><?= $tag ?></li>
+                                <li class="summary__tag --tagBtn --tagBtn--light"><?= $tag ?></li>
                             <?php endif ?>
                         <?php endforeach ?>
                     </ul>

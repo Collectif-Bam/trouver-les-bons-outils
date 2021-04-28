@@ -2,7 +2,11 @@ Title: Nextcloud
 
 ----
 
-Fonction: <p>Stocker et partager ses fichiers</p>
+Fonction: Stocker et partager ses fichiers
+
+----
+
+Pros: 
 
 ----
 
@@ -10,11 +14,15 @@ Summary: <p>Nextcloud est un serveur de synchronisation et de partage de fichier
 
 ----
 
+Cons: 
+
+----
+
 Indicators: osinum, mobile
 
 ----
 
-Tags: tag 2, tag 3
+Tags: Centraliser un agenda, Centraliser des fichiers, Centraliser des photos, Discuter par tchat, Discuter par visio
 
 ----
 

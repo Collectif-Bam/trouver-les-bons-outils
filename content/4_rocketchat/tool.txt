@@ -10,11 +10,11 @@ Summary: <p>Nextcloud est un serveur de synchronisation et de partage de fichier
 
 ----
 
-Indicators: 
+Indicators: osinum
 
 ----
 
-Tags: tag 6
+Tags: Faires des visios, Discuter par messagerie instantanée
 
 ----
 

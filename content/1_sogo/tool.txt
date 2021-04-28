@@ -2,15 +2,15 @@ Title: Sogo
 
 ----
 
-Fonction: <p>Centraliser son calendrier et carnet d'adresse</p>
+Fonction: Centraliser son calendrier et carnet d'adresse
 
 ----
 
 Pros:
 
-- blableblibo blubli blableble
-- blableblibo blubli blableble
-- blableblibo blubli blableble
+- blabla blabliblo bleblubliblo
+- blabla blabliblo bleblubliblo
+- blabla blabliblo bleblubliblo
 
 ----
 
@@ -20,9 +20,11 @@ Summary: <p>SOGo offre de multiples façons d’accéder à l’agenda, aux donn
 
 Cons:
 
-- blableblibo blubli blableble
-- blableblibo blubli blableble
-- blableblibo blubli blableble
+- blabla blabliblo bleblubliblo
+- blabla blabliblo bleblubliblo
+- blabla blabliblo bleblubliblo
+- blabla blabliblo bleblubliblo
+- blabla blabliblo bleblubliblo
 
 ----
 
@@ -30,11 +32,15 @@ Indicators: osinum
 
 ----
 
-Tags: tag 1, tag 2, tag 3
+Tags: Centraliser un agenda, Centraliser des contacts
 
 ----
 
 Positive: 
+
+----
+
+Negative: 
 
 ----
 

@@ -55,6 +55,33 @@ DÉBUT
                     content.classList.add('hide')
                 }, 500);
             }
+        },
+        getTags: tool => {
+            let tags = []
+            tool.querySelectorAll('.summary__tag').forEach(tag => {
+                tags.push(tag.textContent)
+            })
+
+            return tags
+        },
+        preselect: tool => {
+            tool.classList.add('tool--hover')
+            
+            const tags = tools.getTags(tool)
+
+            tools.cards.forEach(tool => {
+                tool.querySelectorAll('.summary__tag').forEach(tag => {
+                    if (tags.includes(tag.textContent)) {
+                        tag.classList.add('--tagBtn--preselect')
+                    }
+                })
+            })
+        },
+        depreselect: tool => {
+            tool.classList.remove('tool--hover')
+            document.querySelectorAll('.--tagBtn--preselect').forEach(tag => {
+                tag.classList.remove('--tagBtn--preselect')
+            })
         }
     }
 
@@ -88,11 +115,13 @@ DÉBUT
                     tools.cards.forEach(tool => {
                         if (!tool.dataset.indicators.includes('mobile')) {
                             tool.classList.add('mobileLock')
+                            selection.indicators.mobile.classList.remove('hide')
                         }
                     })
                 } else {
                     document.querySelectorAll('.mobileLock').forEach(element => {
                         element.classList.remove('mobileLock')
+                        selection.indicators.mobile.classList.add('hide')
                     });
                 }
             } else {
@@ -100,11 +129,13 @@ DÉBUT
                     tools.cards.forEach(tool => {
                         if (!tool.dataset.indicators.includes('osinum')) {
                             tool.classList.add('selectionLock')
+                            selection.indicators.osinum.classList.remove('hide')
                         }
                     })
                 } else {
                     document.querySelectorAll('.selectionLock').forEach(element => {
                         element.classList.remove('selectionLock')
+                        selection.indicators.osinum.classList.add('hide')
                     });
                 }
             }
@@ -118,11 +149,13 @@ DÉBUT
         toolsCount: 0,
         filters: document.querySelector('.selection__filters'),
         tools: document.querySelector('.selection__tools'),
+        indicators: {
+            osinum: document.querySelector('.selection__indicators__osinum'),
+            mobile: document.querySelector('.selection__indicators__mobile')
+        },
         refresh: () => {
             selection.practicesCount = delivery.activeFilters.length
             selection.practicesCounter.textContent = selection.practicesCount
-            
-            console.log(delivery.selectedTools);
 
             selection.toolsCount = delivery.selectedTools.length
             selection.toolsCounter.textContent = selection.toolsCount
@@ -143,7 +176,6 @@ DÉBUT
                 selection.form.submitBtn.classList.remove('--fadeFromDown')
             },
             success: () => {
-                console.log('success');
                 const originalText = selection.form.CTA.textContent
 
                 selection.form.CTA.textContent = 'Envoyé !'
@@ -224,7 +256,7 @@ DÉBUT
             delivery.activeFilters.push(tag)
 
             const li = document.createElement('li')
-            li.innerHTML = `<button class="selection__filter --tagBtn">${tag}<span><img class="picto" src="${app.url}/assets/pictos/close.svg" /></span></button>`
+            li.innerHTML = `<button class="selection__filter --tagBtn">${tag}<span><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L13 13" stroke="#fff"/><path d="M13 1L1 13" stroke="#fff"/></svg></span></button>`
             selection.filters.appendChild(li)
 
             target.classList.add('hide')
@@ -249,11 +281,10 @@ DÉBUT
             const title = tool.querySelector('h2').textContent
 
             if (!delivery.selectedTools.includes(title)) {
-                console.log('select');
                 delivery.selectedTools.push(title)
             
                 const li = document.createElement('li')
-                li.innerHTML = `<button class="selection__tool --tagBtn">${title}<span><img class="picto" src="${app.url}/assets/pictos/close.svg" /></span></button>`
+                li.innerHTML = `<button class="selection__tool --tagBtn">${title}<span><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L13 13" stroke="#fff"/><path d="M13 1L1 13" stroke="#fff"/></svg></span></button>`
 
                 selection.tools.appendChild(li)
             } else {
@@ -280,6 +311,35 @@ DÉBUT
                 })
                 delivery.selectedTools = delivery.selectedTools.filter(title => title !== name)
             }
+        },
+        selectedTags: [],
+        selectTags: tool => {
+            tool.querySelectorAll('.summary__tag').forEach(tag => {
+                delivery.selectedTags.push(tag.textContent)
+            })
+
+            tools.cards.forEach(tool => {
+                tool.querySelectorAll('.summary__tag').forEach(tag => {
+                    if (delivery.selectedTags.includes(tag.textContent)) {
+                        tag.classList.add('summary__tag--selected')
+                    }
+                })
+            })
+        },
+        deselectTags: tool => {
+            tool.querySelectorAll('.summary__tag').forEach(tag => {
+                const index = delivery.selectedTags.indexOf(tag.textContent)
+                delivery.selectedTags.splice(index, 1)
+            })
+
+            tools.cards.forEach(tool => {
+                tool.querySelectorAll('.summary__tag').forEach(tag => {
+                    if (!delivery.selectedTags.includes(tag.textContent)) {
+                        tag.classList.remove('summary__tag--selected')
+                    }
+                })
+            })
+            
         }
     }
 
@@ -318,20 +378,41 @@ DÉBUT
 
     selection.tools.addEventListener('click', event => {
         const target = event.target.classList.contains('selection__tool') ? event.target : event.target.closest('.selection__tool')
+        let tool
+        document.querySelectorAll('.tool').forEach(item => {
+            if (item.querySelector('.tool__header h2').textContent === target.textContent) {
+                tool = item
+            }
+        })
+
         delivery.deselectTool(target)
+        delivery.deselectTags(tool)
         selection.refresh()
     })
 
     tools.cards.forEach(tool => {
         tool.addEventListener('mouseenter', () => {
+            if (tool.classList.contains('tool--selected'))
+                return false
             
+            tools.preselect(tool)
+
         })
         tool.addEventListener('mouseleave', () => {
+            if (tool.classList.contains('tool--selected'))
+                return false
             
+                tools.depreselect(tool)
         })
 
         tool.querySelector('.tool__header').addEventListener('click', event => {
             delivery.selectTool(tool)
+            tools.depreselect(tool)
+            if (tool.classList.contains('tool--selected')) {
+                delivery.selectTags(tool)
+            } else {
+                delivery.deselectTags(tool)
+            }
             selection.refresh()
         })
     })

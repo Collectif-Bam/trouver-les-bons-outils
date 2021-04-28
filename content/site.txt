@@ -5,22 +5,45 @@ Title: osinum
 Tagsgroup:
 
 - 
-  title: diffuser
-  tags: tag 1, tag 2, tag 3
+  title: Diffuser
+  tags: >
+    Déployer un site Internet rapidement,
+    Déployer et animer un forum, Envoyer
+    des emails
+- 
+  title: Discuter
+  tags: Discuter par visio, Discuter par tchat
 - 
   title: Produire
-  tags: tag 4, tag 5, tag 6
+  tags: >
+    Envoyer des newsletters, Collaborer sur
+    un même document, Assurer votre veille
+    documentaire et la partager
 - 
-  title: produire
-  tags: faire ci, faire ça
+  title: Ranger
+  tags: >
+    Centraliser un agenda, Centraliser des
+    fichiers, Centraliser des photos,
+    Centraliser des contacts
+- 
+  title: Analyser
+  tags: >
+    Suire les statistiques de mon site web,
+    Créer des sondages
+- 
+  title: Gérer
+  tags: >
+    Facturer, Suivre et gérer mes projets /
+    listes de tâches, Gérer mes relations
+    clients
 
 ----
 
-Name: Osinum
+Name: Adrien
 
 ----
 
-Email: contact@osinum.fr
+Email: adrien@collectifbam.fr
 
 ----
 
