@@ -543,9 +543,33 @@ input[type="email"] {
 }
 
 .picto {
-    max-width: 2rem;
+    width: 2rem;
     max-height: 2rem;
 }
+
+.tool--selected .picto.osinum path {
+    fill: #fff;
+}
+.tool--selected .picto.mobile path {
+    stroke: #fff;
+}
+
+.selection__indicators__mobile svg {
+    margin-left: -.2rem;
+}
+
+.selection__indicators__osinum path {
+    fill: #fff;
+}
+.selection__indicators__mobile path {
+    stroke: #fff;
+}
+
+.selection__indicators__osinum .picto,
+.selection__indicators__mobile .picto {
+    margin-right: 1rem;
+}
+
 
 .plus {
     max-width: 1rem;
