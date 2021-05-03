@@ -76,6 +76,12 @@ DÉBUT
                     }
                 })
             })
+
+            document.querySelectorAll('.selection__filter').forEach(practice => {
+                if (tags.includes(practice.textContent) && practice.classList.contains('--tagBtn--white')) {
+                    practice.classList.add('--tagBtn--preselect')
+                }
+            })
         },
         depreselect: tool => {
             tool.classList.remove('tool--hover')
@@ -87,6 +93,8 @@ DÉBUT
 
     const search = {
         btn: document.querySelector('.search__btn'),
+        welcome: document.querySelector('.welcome'),
+        welcomeBtn: document.querySelector('.welcome__btn'),
         dropDown: document.querySelector('.dropDown'),
         container: document.querySelector('.search'),
         wrapper: document.querySelector('.search__wrapper'),
@@ -101,10 +109,14 @@ DÉBUT
         },
         isOpen: false,
         toggle: () => {
+            search.btn.classList.remove('unvisible')
             search.container.classList.toggle('search--open')
             search.dropDown.classList.toggle('dropDown--close')
             setTimeout(() => {
                 search.wrapper.classList.toggle('unvisible')
+                setTimeout(() => {
+                    search.welcome.classList.add('hide')
+                }, 500);
             }, 100);
             
             search.isOpen = !search.isOpen
@@ -147,7 +159,7 @@ DÉBUT
         practicesCount: 0,
         toolsCounter: document.querySelector('.toolsCount'),
         toolsCount: 0,
-        filters: document.querySelector('.selection__filters'),
+        filtersList: document.querySelector('.selection__filters'),
         tools: document.querySelector('.selection__tools'),
         indicators: {
             osinum: document.querySelector('.selection__indicators__osinum'),
@@ -251,13 +263,14 @@ DÉBUT
     const delivery = {
         activeFilters: [],
         selectedTools: [],   
+        tooledPractices: [],
         addToFilters: target => {
             const tag = target.textContent
             delivery.activeFilters.push(tag)
 
             const li = document.createElement('li')
-            li.innerHTML = `<button class="selection__filter --tagBtn">${tag}<span><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L13 13" stroke="#fff"/><path d="M13 1L1 13" stroke="#fff"/></svg></span></button>`
-            selection.filters.appendChild(li)
+            li.innerHTML = `<button class="selection__filter --tagBtn --tagBtn--white">${tag}<span><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L13 13" stroke="#fff"/><path d="M13 1L1 13" stroke="#fff"/></svg></span></button>`
+            selection.filtersList.appendChild(li)
 
             target.classList.add('hide')
         },
@@ -287,30 +300,38 @@ DÉBUT
                 li.innerHTML = `<button class="selection__tool --tagBtn">${title}<span><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L13 13" stroke="#fff"/><path d="M13 1L1 13" stroke="#fff"/></svg></span></button>`
 
                 selection.tools.appendChild(li)
+
+                // tool.querySelectorAll('.summary__tag').forEach(tag => {
+                //     delivery.tooledPractices.push(tag.textContent)
+                // })
             } else {
                 delivery.deselectTool(tool)
             }
         },
         deselectTool: tool => {
+            const name = tool.classList.contains('selection__tool') ? tool.textContent : tool.querySelector('h2').textContent
+
             if (tool.classList.contains('selection__tool')) {
-                const name = tool.textContent
+
+
+
                 tools.cards.forEach(tool => {
                     if (tool.querySelector('h2').textContent === name) {
                         tool.classList.toggle('tool--selected')
                     }
                 })
-                delivery.selectedTools = delivery.selectedTools.filter(title => title !== name)
                 tool.parentNode.removeChild(tool)
             } else {
-                const name = tool.querySelector('h2').textContent
 
                 document.querySelectorAll('.selection__tool').forEach(tool => {
                     if (tool.textContent === name) {
                         tool.parentNode.removeChild(tool)
                     }
                 })
-                delivery.selectedTools = delivery.selectedTools.filter(title => title !== name)
             }
+
+            delivery.selectedTools = delivery.selectedTools.filter(title => title !== name)
+
         },
         selectedTags: [],
         selectTags: tool => {
@@ -339,7 +360,19 @@ DÉBUT
                     }
                 })
             })
-            
+        },
+        refresh: () => {
+            delivery.tooledPractices = []
+            document.querySelectorAll('.summary__tag--selected').forEach(tooledPractice => {
+                delivery.tooledPractices.push(tooledPractice.textContent)
+            })
+
+            document.querySelectorAll('.selection__filter').forEach(filter => {
+                filter.classList.add('--tagBtn--white')
+                if (delivery.tooledPractices.includes(filter.textContent)) {
+                    filter.classList.remove('--tagBtn--white')
+                }
+            })
         }
     }
 
@@ -349,6 +382,9 @@ DÉBUT
     // =========================================== INTERACTIONS
 
     search.btn.addEventListener('click', () => {
+        search.toggle()
+    })
+    search.welcomeBtn.addEventListener('click', () => {
         search.toggle()
     })
 
@@ -369,7 +405,7 @@ DÉBUT
         })
     });
 
-    selection.filters.addEventListener('click', event => {
+    selection.filtersList.addEventListener('click', event => {
         const target = event.target.closest('.selection__filter')
         delivery.removeFromFilters(target)
         selection.refresh()
@@ -388,6 +424,7 @@ DÉBUT
         delivery.deselectTool(target)
         delivery.deselectTags(tool)
         selection.refresh()
+        delivery.refresh()
     })
 
     tools.cards.forEach(tool => {
@@ -414,6 +451,7 @@ DÉBUT
                 delivery.deselectTags(tool)
             }
             selection.refresh()
+            delivery.refresh()
         })
     })
 

@@ -23,15 +23,25 @@
 </head>
 <body data-url="<?= $site->url() ?>" data-email="<?= $site->email() ?>" data-name="<?= $site->name() ?>">
     <!--========== SEARCH ==========-->
+    <div class="sectionColor"></div>
 
-    <div class="search">
-        <button class="search__btn">
-            <h1>Filtrer</h1>
-            <img class="picto dropDown dropDown--close" src="<?= url('assets/pictos') ?>/drop-down.svg" alt="">
+    <div class="search search--open">
+        <button class="search__btn unvisible">
+            <h1>Recherche</h1>
+            <img class="picto dropDown" src="<?= url('assets/pictos') ?>/drop-down.svg" alt="">
         </button>
         
         <div class="search__content">
-            <div class="search__wrapper unvisible">
+            <div class="search__wrapper">
+                <div class="search__welcome welcome">
+                    <h2 class="welcome__message">
+                        Bienvenue sur l’outil de diagnostic de vos outils !<br />
+                        Pour commencer, activez les filtres qui vous intéressent.
+                    </h2>
+                    <button class="welcome__btn --tagBtn --tagBtn--light">
+                        <h2>Voir les outils</h2> <span><img class="picto dropDown" src="<?= url('assets/pictos') ?>/drop-down.svg" alt=""></span>
+                    </button>
+                </div>
                 <h2 class="search__title search__title--filters">Affichage</h2>
                 <ul class="search__filters filters">
                     <li class="filters__wrapper">
@@ -51,11 +61,14 @@
                         <ul class="search__group group">
                             <li><h3 class="group__title"><?= $group->title() ?></h3></li>
                             <?php foreach($group->tags()->split() as $tag): ?>
-                                <li><button class="search__filter --tagBtn"><img class="plus" src="<?= url('assets/pictos') ?>/plus.svg" alt=""><?= $tag ?></button></li>
+                                <li><button class="search__filter"><img class="plus" src="<?= url('assets/pictos') ?>/plus.svg" alt=""><?= $tag ?></button></li>
                             <?php endforeach ?>
                         </ul>
                     <?php endforeach ?>
                 </div>
+                <footer class="search__footer">
+                    <a href="https://osinum.fr/" target="_blank">Proposé par  <span style="text-decoration: underline; font-weight: 300;">Osinum</span></a> | <a href="mailto:<?= $site->email() ?>">Nous contacter</a> | <a href="#">Crédits</a>
+                </footer>
             </div>
         </div>
     </div>
@@ -64,7 +77,7 @@
     
     <div class="selection selection--open">
         <button class="selection__btn">
-            <h1>Ma sélection</h1>
+            <h1>Sélection</h1>
         </button>
 
         <div class="selection__content">
@@ -117,6 +130,9 @@
                 </button>
                 <div class="tool__summary summary">
                     <h3 class="summary__fonction"><?= $tool->fonction()->inline() ?></h3>
+                    <?php if ($tool->link()->isNotEmpty()): ?>
+                        <a class="summary__link" href="<?= $tool->link() ?>" target="_blank">En savoir plus</a>
+                    <?php endif ?>
                     
                     <p class="summary__description"><?= $tool->summary() ?></p>
                     

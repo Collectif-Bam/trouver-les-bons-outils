@@ -2,11 +2,11 @@ title: Site
 
 tabs:
   content:
-    label: Contenu
+    label: Outils
     icon: layers
     sections:
       tools:
-        headline: Outils
+        headline: Liste des outils
         type: pages
         template: tool
         create: tool

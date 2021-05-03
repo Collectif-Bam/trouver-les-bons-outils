@@ -4,40 +4,47 @@ tabs:
   content:
     label: Contenu
     icon: document
-    sections:
-      content:
-        type: fields
-        fields:
-          fonction:
-            label: Description de la fonction
-            type: text
-            placeholder: Centraliser son calendrier et carnet d’adresse
-            width: 1/2
-          pros:
-            label: Osinum l'apprécie pour
-            type: textarea
-            width: 1/2
-            buttons:
-              - ul
-              - link
-              - bold
-              - italic
-            help: Une liste à puce.
-          summary:
-            label: Présentation
-            type: writer
-            width: 1/2
-            placeholder: Brève présentation de l'outil
-          cons:
-            label: Osinum avertit sur
-            type: textarea
-            width: 1/2
-            buttons:
-              - ul
-              - link
-              - bold
-              - italic
-            help: Une liste à puce.
+    columns:
+      - width : 1/2
+        sections:
+          leftContent:
+            type: fields
+            fields:
+              fonction:
+                label: Description de la fonction
+                type: text
+                placeholder: Centraliser son calendrier et carnet d’adresse
+              link:
+                type: url
+                label: Lien pour en savoir plus
+              summary:
+                label: Présentation
+                type: writer
+                placeholder: Brève présentation de l'outil
+
+      - width: 1/2
+        sections:
+          rightContent:
+            type: fields
+            fields:
+              pros:
+                label: Osinum l'apprécie pour
+                type: textarea
+                buttons:
+                  - ul
+                  - link
+                  - bold
+                  - italic
+                help: Une liste à puce.
+              cons:
+                label: Osinum avertit sur
+                type: textarea
+                buttons:
+                  - ul
+                  - link
+                  - bold
+                  - italic
+                help: Une liste à puce.
 
 
   categories:
