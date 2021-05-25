@@ -530,7 +530,7 @@ input[type="email"] {
     max-height: 1rem;
 }
 
-.comment__content ul {
+.comment__content :where(ul, p) {
     list-style: inside;
     margin-left: 2vw;
     padding-bottom: 1rem;
