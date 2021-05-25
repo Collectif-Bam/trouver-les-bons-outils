@@ -1,4 +1,6 @@
-# Une interface qui aide à trouver les outils libres correspondant à ses pratiques.
+# Une interface pour trouver les outils libres qui correspondent à ses pratiques.
+
+## Basée sur Kirby :
 
 
 <img src="http://getkirby.com/assets/images/github/plainkit.jpg" width="300">
