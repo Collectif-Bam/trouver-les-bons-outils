@@ -45,6 +45,12 @@ RewriteRule ^(.*) index.php [L]
 # pass the Authorization header to PHP
 SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
 
+# Protect website using password
+# AuthName "Entrez le mot de passe pour accéder au prototype"
+# AuthType Basic
+# AuthUserFile "/app/data/public/trouver-les-bons-outils/.htpasswd"
+# Require valid-user
+
 # compress text file responses
 <IfModule mod_deflate.c>
 AddOutputFilterByType DEFLATE text/plain

@@ -141,14 +141,14 @@ DÉBUT
                     tools.cards.forEach(tool => {
                         if (!tool.dataset.indicators.includes('osinum')) {
                             tool.classList.add('selectionLock')
-                            selection.indicators.osinum.classList.remove('hide')
                         }
                     })
+                    selection.indicators.osinum.classList.remove('hide')
                 } else {
                     document.querySelectorAll('.selectionLock').forEach(element => {
                         element.classList.remove('selectionLock')
-                        selection.indicators.osinum.classList.add('hide')
-                    });
+                    })
+                    selection.indicators.osinum.classList.add('hide')
                 }
             }
         }
